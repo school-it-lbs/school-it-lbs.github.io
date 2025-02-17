@@ -1,0 +1,153 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: content-box;
+    height: 100vh;
+    line-height: 1.5rem;
+}
+
+#container {
+
+
+    display: grid;
+    grid-template-columns: 120px 600px 600px 400px;
+    gap: 40px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "head head head head"
+        "nav info coding reaction"
+        "nav info render reaction"
+        "nav info . .";
+}
+
+
+header {
+    grid-area: head;
+    background-image: url('css3_logo.svg');
+    background-repeat: no-repeat;
+    background-size: 50px;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    padding-left: 80px;
+    padding-top: 20px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+nav {
+    grid-area: nav;
+}
+
+nav button {
+    border: none;
+    background-color: transparent;
+    text-transform: uppercase;
+    font-size: 18px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    display: block;
+    border-left: solid 6px transparent;
+}
+
+nav button:hover,
+nav button.active {
+    border-left-color: #264de4;
+}
+
+div#reaction {
+    grid-area: reaction;
+    justify-content: center;
+}
+
+#smile {
+    margin-left: 60px;
+}
+
+div#info {
+    grid-area: info;
+}
+
+div#code {
+    grid-area: coding;
+}
+
+div#render {
+    grid-area: render;
+}
+
+#editor {
+    height: 500px;
+    width: 600px;
+    border: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+#render {
+    height: 500px;
+}
+
+code {
+    font-size: 1.3em;
+    color: darkcyan;
+}
+
+#render {
+    border: dashed grey 2px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: rgb(186, 235, 235);
+}
+
+#render::before {
+    content: 'HTML Ausgabe';
+    display: block;
+    position: absolute;
+    margin-top: -24px;
+    color: grey;
+}
+
+#code::before {
+    content: 'CSS';
+    display: block;
+    position: absolute;
+    margin-top: -24px;
+    color: grey;
+}
+
+#solution {
+    display: none;
+}
+
+#solve {
+    color: grey;
+    border: grey 1px dashed;
+    padding: 10px;
+    margin: 10px;
+}
+
+#steps {
+    display: none;
+}
+
+#render.correct {
+    background-image: url(reaction/check_mark.png);
+    background-color: rgb(235, 163, 235);
+
+}
+
+details {
+    margin-bottom: 20px;
+}
+
+summary {
+    font-size: 18px;
+    font-weight: 700;
+
+}
+
+summary:hover {
+    cursor: pointer;
+}

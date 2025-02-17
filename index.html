@@ -1,11 +1,1216 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CSS Tutorial with CodeMirror</title>
+    <link rel="stylesheet" href="codemirror/codemirror.min.css">
+    <link rel="stylesheet" href="codemirror/monokai.min.css">
+    <script src="codemirror/codemirror.min.js"></script>
+    <script src="codemirror/css.min.js"></script>
+    <link rel="stylesheet" href="custom.css">
+    <script src="custom.js" defer></script>
+    <style id="generatedCss"></style>
 </head>
+
 <body>
-    TEST
+    <div id="container">
+        <header>
+            <h1>CSS Code Tutorial</h1>
+        </header>
+        <nav></nav>
+        <div id="reaction">
+            <img id="smile" src="reaction/slightly_smiling_face.png" alt="rating" />
+            <div id="task">
+                <div id="task_text"></div>
+                <button id="solve">Musterlösung</button>
+            </div>
+        </div>
+        <div id="info">
+            <div id="text"></div>
+        </div>
+        <div id="code">
+            <textarea id="editor"></textarea>
+            <textarea id="solution"></textarea>
+        </div>
+        <div id="render"></div>
+
+    </div>
+
+
+    <div id="steps">
+
+        <!-- ===================================================================================================== -->
+        <!-- Task 1-->
+        <div id="task1" data-title="color" data-smile="slightly_smiling_face.png">
+            <template class="info">
+                <h2>color</h2>
+                <p>Farben können an verschieden Elementen gesetzt werden:
+                    <ul>
+                        <li><code>color</code> ist die Schriftfarbe</li>
+                        <li><code>background-color</code> Hintergrundfarbe eines Elements</li>
+                        <li><code>border-color</code> Farbe vom Rand</li>
+                    </ul>
+                    </p>
+                <p>Du kannst Farbwerte auf verschiede Weise setzen:
+                <ul>
+                    <li>Mit Namen <code>red</code> (siehe <a
+                            href="https://developer.mozilla.org/en-US/docs/Web/CSS/named-color" target="_blank">MDN
+                            named-color</a>)</li>
+                    <li>Hex-Wert <code>#00FF00</code> (hier Grün)</li>
+                    <li>RGB <code>rgb(0, 0, 255)</code> (hier Blau)</li>
+                    <li>RGBA also mit Alpha-Wert (Transparenz) <code>rgba(100,100,100,0.5)</code> (ein Grau)</li>
+                    <li>Andere Farbräume wie HSL und HWB werden auch unterstützt</li>
+                    <li><code>transparent</code> kann als Wert genutzt werden um eine Farbe zu entfernen</li>
+                </ul>
+                </p>
+                
+                <p>Demo: Farbauswahl im Browser: <input type="color" /> (wird nicht automatisch kopiert)</p>
+
+                <p>siehe auch <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color" target="_blank">MDN
+                        color</a></p>
+
+
+                <h3>Beispiel</h3>
+                <code><pre>
+.example_named{    
+    color: red;
+    border-color: blue;
+    background-color: pink;
+}
+
+.example_rgb{
+    color: rgb(255, 128, 0);
+    border-color: rgb(0, 128, 192);
+    background-color: rgb(128, 128, 255);
+}
+                </pre></code>
+            </template>
+
+            <textarea class="default">
+.c1 {        
+    /* CSS hier ergänzen */
+    color: red;
+    border-color: blue;
+    background-color: #F15BB5;
+}
+
+.c2{
+    
+    /* CSS hier ergänzen */
+    background-color: #FEE440;    
+}
+
+#render div{
+    padding: 10px;
+    margin: 10px;
+    border-style: solid;
+    border-width. 4px;
+}
+            </textarea>
+
+
+            <textarea class="solution">
+.c1 {        
+    color: white;
+    border-color: chartreuse;
+    background-color: black;
+}
+
+.c2{
+    color: rgb(0, 255, 0);
+    border-color: rgb(0, 0, 255);
+    background-color: transparent;   
+}
+
+#render div{
+    padding: 10px;
+    margin: 10px;
+    border-style: solid;
+    border-width. 4px;
+}
+            </textarea>
+
+
+            <template class="html">
+                <div class="c1">
+                    Ich bin .c1
+                </div>
+                <div class="c2">
+                    Ich bin .c2
+                </div>
+            </template>
+
+            <template class="task">
+                <h3>Aufgabe</h3>
+                <ol>
+                    <li>.c1: setze Hintergrundfarbe auf schwarz, Textfarbe auf weiß (white) und Rand auf chartreuse (#7fff00)</li>
+                    <li>.c2: Transparenter Hintergrund, grüne Textfarbe (lime) und blauer Umrandung (blue)</li>
+                </ol>
+            </template>
+
+            <script>
+                function validate_task1() {
+                    const cs1 = window.getComputedStyle(document.querySelector('.c1'));
+                    const cs2 = window.getComputedStyle(document.querySelector('.c2'));
+
+                    console.log(cs2.color);
+
+                    return (
+                        cs1.color === 'rgb(255, 255, 255)' && cs1.backgroundColor === 'rgb(0, 0, 0)' && cs1.borderColor === 'rgb(127, 255, 0)' &&
+                        cs2.color === 'rgb(0, 255, 0)' && cs2.backgroundColor === 'rgba(0, 0, 0, 0)' && cs2.borderColor === 'rgb(0, 0, 255)'
+                    );
+                }
+            </script>
+        </div>
+        <!-- ===================================================================================================== -->
+
+        <!-- ===================================================================================================== -->
+        <!-- Task 2-->
+        <div id="task2" data-title="border" data-smile="dotted_line_face.png">
+            <template class="info">
+                <h2>border</h2>
+                <p>Mit folgenden CSS-Regeln kannst du den Rand eines Elements verändern.</p>
+                <ul>
+                    <li><code>border-color</code> setzt die Farbe</li>
+                    <li><code>border-style</code> setzt die Linienart</li>
+                    <li><code>border-width</code> setzt die Liniendicke (z.B. in Pixel <em>px</em>)</li>
+                </ul>
+                <p>Da man häufig alle drei Attribute benötigt gibt es den Shorthand <code>border</code></p>
+
+                <p>siehe auch <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border" target="_blank">MDN
+                        border</a></p>
+
+
+                <h3>Beispiel</h3>
+                <code><pre>
+border-color: red;
+border-style: solid;
+border-width: 2px;
+                    </pre></code>
+                oder
+                <code><pre>
+border: solid 2px red;
+                    </pre></code>
+
+
+            </template>
+
+            <textarea class="default">
+#box {
+    margin: 10px;
+    background-color: #9B5DE5;
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+
+    /* CSS hier ergänzen */
+    /* border: color style width */
+    border: solid red 2px;
+}
+            </textarea>
+
+
+            <textarea class="solution">
+#box {
+    margin: 10px;
+    background-color: #9B5DE5;
+    width: 200px;
+    height: 100px;
+    padding: 10px;       
+    border: dashed blue 4px;
+}
+            </textarea>
+
+
+            <template class="html">
+                <div id="box">
+                    Hi! <br />ich bin #box
+                </div>
+            </template>
+
+            <template class="task">
+                <h3>Aufgabe</h3>
+                <p>Setze den Rand vom <code>div#box</code> auf:
+                <ul>
+                    <li><em>blue</em></li>
+                    <li><em>dashed</em></li>
+                    <li><em>4px</em></li>
+                </ul>
+            </template>
+
+            <script>
+                function validate_task2() {
+                    const expectedBorderColor = 'rgb(0, 0, 255)';
+                    const expectedBorderStyle = 'dashed';
+                    const expectedBorderWidth = '4px';
+
+                    const targetElement = document.querySelector('#box');
+                    const computedStyle = window.getComputedStyle(targetElement);
+
+                    const isCorrect = (computedStyle.borderColor === expectedBorderColor) &&
+                        (computedStyle.borderStyle === expectedBorderStyle) && (computedStyle.borderWidth === expectedBorderWidth);
+
+                    return isCorrect;
+                }
+            </script>
+        </div>
+        <!-- ===================================================================================================== -->
+
+
+
+        <!-- ===================================================================================================== -->
+        <!-- Task 3-->
+        <div id="task3" data-title="padding" data-smile="cowboy_hat_face.png">
+            <template class="info">
+                <h2>padding</h2>
+                <p>Mit <code>padding</code> setzt du den Abstand in einem Element. </p>
+                <p>Es ist auch möglich die Abstände in verschiedenen Richtungen einzeln zu setzen.</p>
+                <ul>
+                    <li><code>padding-top</code></li>
+                    <li><code>padding-right</code></li>
+                    <li><code>padding-bottom</code></li>
+                    <li><code>padding-left</code></li>
+                </ul>
+                <p><code>padding</code> kann auch als Shorthand genutzt werden:</p>
+                <ul>
+                    <li>Mit vier Werten <code>padding: top right bottom left</code> in Uhrzeigersinn</li>
+                    <li>oder drei Werten <code>padding: top left+right bottom</code></li>
+                    <li>oder zwei Werten <code>padding: top+bottom left+right</code></li>
+                </ul>
+
+                <p>siehe auch <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding" target="_blank">MDN
+                        padding</a></p>
+
+                <h3>Beispiel</h3>
+                <code><pre>
+.example1{
+    padding: 5px;
+}
+
+.example2{
+    padding: 7px 10px;
+}
+
+.example3{
+    padding: 5px 10px 15px 20px;
+}
+
+.example4{
+    padding-top: 5px; 
+    padding-right: 10px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+}
+                </pre></code>
+            </template>
+
+            <textarea class="default">
+.box1 {
+    margin: 20px;
+    background-color: #F15BB5;    
+
+    /* CSS hier ergänzen */
+    padding: 20px;
+}
+.box2 {    
+    margin: 20px;
+    background-color: #FEE440;
+
+    /* CSS hier ergänzen */
+}
+            </textarea>
+
+
+            <textarea class="solution">
+.box1 {
+    margin: 20px;
+    background-color: #F15BB5;    
+    padding: 10px 5px 20px 30px;
+}
+.box2 {    
+    margin: 20px;
+    background-color: #FEE440;
+    padding: 30px;
+}
+            </textarea>
+
+
+            <template class="html">
+                <div class="box1">
+                    Ich bin .box1
+                </div>
+                <div class="box2">
+                    Ich bin .box2
+                </div>
+            </template>
+
+            <template class="task">
+                <h3>Aufgabe</h3>
+                <p>Gebe .box2 ein <code>padding</code> von 30px.</p>
+                <p>Ändere das <code>padding</code> von .box1 auf:
+                <ul>
+                    <li>top: 10px</li>
+                    <li>right: 5px</li>
+                    <li>bottom: 20px</li>
+                    <li>left: 30px</li>
+                </ul>
+                </p>
+            </template>
+
+            <script>
+                function validate_task3() {
+                    const cs1 = window.getComputedStyle(document.querySelector('.box1'));
+                    const cs2 = window.getComputedStyle(document.querySelector('.box2'));
+                    return (cs2.padding === '30px' && cs1.paddingTop === '10px' && cs1.paddingRight === '5px' && cs1.paddingBottom === '20px' && cs1.paddingLeft === '30px');
+                }
+            </script>
+        </div>
+        <!-- ===================================================================================================== -->
+
+
+
+        <!-- ===================================================================================================== -->
+        <!-- Task 4-->
+        <div id="task4" data-title="margin" data-smile="smiling_face_with _sunglasses.png">
+            <template class="info">
+                <h2>margin</h2>
+                <p>Mit <code>margin</code> setzt du den Abstand um einem Element. </p>
+                <p>Es ist auch möglich die Abstände in verschiedenen Richtungen einzeln zu setzen.</p>
+                <ul>
+                    <li><code>margin-top</code></li>
+                    <li><code>margin-right</code></li>
+                    <li><code>margin-bottom</code></li>
+                    <li><code>margin-left</code></li>
+                </ul>
+                <p><code>margin</code> kann auch als Shorthand genutzt werden:</p>
+                <ul>
+                    <li>Mit vier Werten <code>margin: top right bottom left</code> in Uhrzeigersinn</li>
+                    <li>oder drei Werten <code>margin: top left+right bottom</code></li>
+                    <li>oder zwei Werten <code>margin: top+bottom left+right</code></li>
+                </ul>
+
+                <p>Hinweis: Der obere und untere <code>margin</code> von zwei Elementen kann in bestimmten Fällen
+                    zusammenfallen (<em>margin-collapse</em>).</p>
+
+                <p>siehe auch <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin" target="_blank">MDN
+                        margin</a></p>
+
+                <h3>Beispiel</h3>
+                <code><pre>
+.example1{
+    margin: 15px;
+}
+
+.example2{
+    margin: 8px 12px;
+}
+
+.example3{
+    margin: 15px 12px 13px 10px;
+}
+
+.example4{
+    margin-top: 15px; 
+    margin-right: 12px;
+    margin-bottom: 13px;
+    margin-left: 10px;
+}
+
+/* evtl. margin-collapse zu 10px */
+p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+                </pre></code>
+
+
+
+
+            </template>
+
+            <textarea class="default">
+#render p{
+    /* margin-collapse */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #00BBF9;
+}
+
+.m1 {
+    background-color: #00F5D4;
+    
+    /* CSS hier ergänzen */
+    margin: 10px;
+}
+
+.m2{
+    background-color: #9B5DE5;
+    /* CSS hier ergänzen */
+}
+
+.m3{
+    background-color: #F15BB5;
+    /* CSS hier ergänzen */
+}
+
+
+#render div{
+    padding: 10px;
+}
+
+            </textarea>
+
+
+            <textarea class="solution">
+#render p{
+    /* margin-collapse */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #00BBF9;
+}
+
+.m1 {
+    background-color: #00F5D4;
+    margin: 40px 0;
+}
+
+.m2{
+    background-color: #9B5DE5;
+    margin: 20px;
+}
+
+.m3{
+    background-color: #F15BB5;
+    margin-top: 60px;
+}
+
+
+#render div{
+    padding: 10px;
+}
+            </textarea>
+
+
+            <template class="html">
+                <p>
+                    Ich bin ein Paragraph
+                </p>
+                <p>
+                    Ich bin auch ein Paragraph. Hier passiert ein margin-collapse, zwischen den beiden Paragraphen sind
+                    nur 10px nicht 20px.
+                </p>
+                <div class="m1">
+                    Ich bin .m1
+                </div>
+                <div class="m2">
+                    Ich bin .m2
+                </div>
+                <div class="m3">
+                    Ich bin .m3
+                </div>
+            </template>
+
+            <template class="task">
+                <h3>Aufgabe</h3>
+                <ul>
+                    <li>.m1: oben und unten 40px margin</li>
+                    <li>.m2: auf allen Seiten 20px</li>
+                    <li>.m3: oben 60px</li>
+                </ul>
+            </template>
+
+            <script>
+                function validate_task4() {
+                    const cs1 = window.getComputedStyle(document.querySelector('.m1'));
+                    const cs2 = window.getComputedStyle(document.querySelector('.m2'));
+                    const cs3 = window.getComputedStyle(document.querySelector('.m3'));
+                    return (
+                        cs1.marginTop === '40px' && cs1.marginBottom === '40px' && cs1.marginLeft === '0px' && cs1.marginRight === '0px' &&
+                        cs2.marginTop === '20px' && cs2.marginBottom === '20px' && cs2.marginLeft === '20px' && cs2.marginRight === '20px' &&
+                        cs3.marginTop === '60px' && cs3.marginBottom === '0px' && cs3.marginLeft === '0px' && cs3.marginRight === '0px'
+                    );
+                }
+            </script>
+        </div>
+        <!-- ===================================================================================================== -->
+
+                        <!-- ===================================================================================================== -->
+        <!-- Task Display-->
+        <div id="task_display" data-title="display" data-smile="clown_face.png">
+            <template class="info">
+                <h2>display</h2>
+                <p>Jedes HTML Element hat einen definierten Darstellungsart, entweder <code>block</code> oder <code>inline</code></p>
+                <ul>
+                    <li><code>block</code>-Elemente nehmen Platz ein und erzwingen einen Umbrauch (z.B. <code>&lt;div&gt;</code>)</li>
+                    <li><code>inline</code>-Elemente bleiben in der Zeile (z.B. <code>&lt;span&gt;</code>)</li>
+                    <li><code>inline-block</code>-Elemente bleiben in der Zeile, nehmen aber Platz ein (z.B. <code>&lt;img&gt;</code>)</li>
+                </ul>
+
+                <p>Mit <code>display</code> kann dieses Verhalten pro Element verändert werden. Der Wert kann auch auf <code>none</code> gesetzt werden damit es ausgeblendet wird.
+                    (siehe
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">MDN display</a>)
+                </p>
+                
+                <h3>Beispiele</h3>
+                <code><pre>
+div.hide {
+    display: none;
+}
+
+span.take_space {
+    display: block;
+}
+                </pre></code>
+
+            </template>
+
+            <textarea class="default">
+.leDiv{
+    background-color: #9B5DE5;
+}
+
+.leSpan{
+    background-color: #F15BB5;
+}
+
+.leP{
+    background-color: #FEE440;
+}
+            </textarea>
+
+
+            <textarea class="solution">
+.leDiv{
+    background-color: #9B5DE5;
+    display: inline;
+}
+
+.leSpan{
+    background-color: #F15BB5;
+    display: block;    
+}
+
+.leP{
+    background-color: #FEE440;
+    display: none;
+}
+                </textarea>
+
+
+            <template class="html">            
+                <div class="leDiv">Ich bin .leDiv ein div</div>
+                <span class="leSpan">Ich bin .leSpan ein span</span>
+                <p class="leP">Ich bin .leP ein p Paragraph</p>              
+            </template>
+
+            <template class="task">
+                <h3>Aufgabe</h3>
+                <ol>
+                    <li>Ändere .leDiv zu <em>inline</em> und .leSpan zu <em>block</em></li>
+                    <li>Blende .leP aus</li>
+                </ol>
+            </template>
+
+
+
+            <script>
+                function validate_task_display() {
+                    const leDiv = window.getComputedStyle(document.querySelector('.leDiv'));
+                    const leSpan = window.getComputedStyle(document.querySelector('.leSpan'));
+                    const leP = window.getComputedStyle(document.querySelector('.leP'));
+                    return (
+                        leDiv.display === 'inline' && leSpan.display === 'block' && leP.display === 'none'
+                    );
+                }
+            </script>
+        </div>
+        <!-- ===================================================================================================== -->
+
+        <!-- ===================================================================================================== -->
+        <!-- Task 5-->
+        <div id="task5" data-title="font" data-smile="face_with_monocle.png">
+            <template class="info">
+                <h2>font</h2>
+                <p>Die Schriftart wird mit <code>font</code> bestimmt. </p>
+
+                <p><code>font-family</code> ist eine Gruppe von Scrhiftarten die verwendet werden sollen. Wird
+                    die erste Schriftart nicht auf dem System gefunden wird die nächste in der Liste verwendet.
+                    Beispielsweise kann man für eine serifenlose Schrift die Regel setzen Arial (vorhanden auf Windows),
+                    Helvetica (vorhanden auf Mac), sans-serif (eine beliebige serifenlose Schrift)</p>
+                <p><code>font-size</code> setzt die Schriftgröße, z.B. in Pixel (px)</p>
+                <p><code>font-weight</code> bestimmt die Liniendicke.</p>
+                <p><code>font-style</code> Stil normal oder kursiv.</p>
+
+                <p>siehe auch <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font" target="_blank">MDN
+                        font</a></p>
+
+
+                <h3>Beispiel</h3>
+                <code><pre>
+.example_fat{
+    font-weight: bold;
+}
+
+.example_cursive{
+    font-style: italic;
+}
+
+.example_sans_serif{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.example_coding{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+}
+                </pre></code>
+
+
+
+            </template>
+
+            <textarea class="default">
+#render p{
+  border: solid 1px black;
+  padding: 10px;
+  margin: 10px;
+}
+
+.f1 {        
+    /* CSS hier ergänzen */
+    font-style: normal;
+    font-weight: normal;
+}
+
+.f2{    
+    /* CSS hier ergänzen */
+    font-style: italic;
+    font-weight: bold;
+}
+
+.f3{    
+    /* CSS hier ergänzen */
+    font-family: 'Times New Roman', Times, serif;    
+}
+            </textarea>
+
+            <textarea class="solution">
+#render p{
+border: solid 1px black;
+padding: 10px;
+margin: 10px;
+}
+
+.f1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.f2{    
+    font-style: italic;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.f3{    
+    font-family: 'Times New Roman', Times, serif;    
+    color: red;
+}
+            </textarea>
+
+
+            <template class="html">
+                <p class="f1">
+                    Ich bin .f1</p>
+
+                <p class="f2">
+                    Ich bin .f2</p>
+
+                <p class="f3">
+                    Ich bin .f3</p>
+
+            </template>
+
+            <template class="task">
+                <h3>Aufgabe</h3>
+                <ul>
+                    <li>.f1: Fette Schrift ohne Serifen (Arial...)</li>
+                    <li>.f2: Schriftgröße 30px</li>
+                    <li>.f3: Rote schrift</li>
+                </ul>
+            </template>
+
+            <script>
+                function validate_task5() {
+                    const cs1 = window.getComputedStyle(document.querySelector('.f1'));
+                    const cs2 = window.getComputedStyle(document.querySelector('.f2'));
+                    const cs3 = window.getComputedStyle(document.querySelector('.f3'));
+
+                    return (
+                        cs1.fontFamily === 'Arial, Helvetica, sans-serif' && cs1.fontWeight > 500 &&
+                        cs2.fontSize === '30px' &&
+                        cs3.color === 'rgb(255, 0, 0)'
+                    );
+                }
+            </script>
+        </div>
+        <!-- ===================================================================================================== -->
+
+        <!-- ===================================================================================================== -->
+        <!-- Task 6-->
+        <div id="task6" data-title="text" data-smile="disguised_face.png">
+            <template class="info">
+                <h2>text</h2>
+                <p>Mit <code>text-*</code> kannst du die Darstellung der Texte selbst verändern.</p>
+                <ul>
+                    <li><code>text-decoration</code> wird verwendet um Textstellen zu markieren <br />(<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration" target="_blank">MDN
+                            text-decoration</a>)</li>
+                    <li>text-transform<code></code> erlaubt es Text Groß-/Kleinschreibung zu ändern <br />(<a
+                            href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform" target="_blank">MDN
+                            text-transform</a>)</li>
+                    <li>Mit der Pseudo-Klasse <code>:hover</code> lassen sich Styles für Hover-Ereignisse steuern
+                        <br />(<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:hover">MDN :hover</a>)
+                    </li>
+                </ul>
+
+
+                <h3>Beispiel</h3>
+                <code><pre>
+a.link_no_effect {
+    text-decoration: none;
+}
+
+ a.link_loud:hover{
+    text-decoration: underline;
+    color: orange;
+    font-weight: bold;
+}
+
+.text_scream{
+    text-transform: uppercase;
+}
+
+p.special{
+    text-decoration: underline overline wavy;
+    color: red;
+}                                      
+                    </pre></code>
+
+
+            </template>
+
+            <textarea class="default">
+.text-block {
+    margin: 10px;
+    background-color: #00BBF9; 
+    opacity: 80%;
+    height: 200px;
+    padding: 20px;
+}
+
+.special{
+    /* CSS hier ergänzen */
+}
+
+.special:hover{
+    background-color: orange;
+}
+
+.alert{
+    color:red;
+    /* CSS hier ergänzen */
+}
+        </textarea>
+
+
+            <textarea class="solution">
+.text-block {
+    margin: 10px;
+    background-color: #00BBF9; 
+    opacity: 80%;
+    height: 200px;
+    padding: 20px;
+}
+
+.special{
+    text-decoration: underline overline wavy;
+}
+
+.special:hover{
+    background-color: orange;
+}
+
+.alert{
+    color:red;
+    text-transform: uppercase;
+}
+            </textarea>
+
+
+            <template class="html">
+                <div class="text-block">
+                    <p class="special">Ich bin .special</p>
+                    <p class="alert">Ich bin .alert</p>
+                </div>
+            </template>
+
+
+
+
+            <template class="task">
+                <h3>Aufgabe</h3>
+                <code>p.special</code> hat ein <em>hover</em> zur demonstration
+                <ul>
+                    <li><code>p.special</code> bekommt die Dekoration underline overline wavy. (Textfarbe nicht
+                        setzen!)
+                    </li>
+                    <li><code>p.alert</code> soll in uppercase ausgegeben werden</li>
+                </ul>
+            </template>
+
+
+            <script>
+                function validate_task6() {
+                    const p1 = window.getComputedStyle(document.querySelector('p.special'));
+                    const p2 = window.getComputedStyle(document.querySelector('p.alert'));
+
+
+                    return (
+                        p1.textDecoration === 'underline overline wavy rgb(0, 0, 0)' &&
+                        p2.textTransform === 'uppercase'
+                    );
+                }
+            </script>
+        </div>
+        <!-- ===================================================================================================== -->
+
+        <!-- ===================================================================================================== -->
+        <!-- Task 7-->
+        <div id="task7" data-title="float" data-smile="thinking _face.png">
+            <template class="info">
+                <h2>float</h2>
+                <p>Mit <code>float</code> kannst du Block-Elemente mit Dimensionen (width / height) in einem anderen
+                    Block-Element positionieren (siehe <a
+                        href="https://developer.mozilla.org/en-US/docs/Web/CSS/float">MDN
+                        float</a>)</p>
+                <p><code>float</code> kann die Werte <code>left</code> und <code>right</code> bekommen, und bestimmt auf
+                    welche Seite vom Block-Element sie positioniert werden sollen.</p>
+                <p><code>clear</code> erlaubt das ein float Element umgebrochen wird. Es kann die Wert
+                    <code>left</code>,
+                    <code>right</code> oder <code>both</code> zugewiesen werden.
+                </p>
+
+
+
+                <h3>Beispiel</h3>
+                <p>Mit diesen CSS wird box_1 rechts angezeigt. box_2 wird auch rechts angezeigt, aber durch das
+                    clear
+                    landet es unter box_1</p>
+                <code><pre>
+.box_1{
+    width: 100px;
+    height: 100px;
+    float: right;
+}
+
+.box_2{
+    width: 100px;
+    height: 100px;
+    float: right;
+    clear: right;
+}
+                        </pre></code>
+
+
+
+            </template>
+
+            <textarea class="default">
+
+.boxA{
+    background-color: #00F5D4;
+    /* CSS hier ergänzen */
+    float: left;
+}
+
+.boxB{
+    background-color: #9B5DE5;
+    /* CSS hier ergänzen */
+    float: left;
+   
+}
+
+.boxC{
+    background-color: #F15BB5;
+    /* CSS hier ergänzen */
+    float: left;
+}
+
+.float-block div{
+    margin: 10px;        
+    height: 50px;
+    width: 100px;
+    padding: 20px;
+    border: solid 2px black;
+}
+            </textarea>
+
+
+            <textarea class="solution">
+.boxA{
+    background-color: #00F5D4;
+    float: left;
+}
+
+.boxB{
+    background-color: #9B5DE5;
+    float: right;
+    
+}
+
+.boxC{
+    background-color: #F15BB5;
+    float: left;
+    clear: left;
+}
+
+.float-block div{
+    margin: 10px;        
+    height: 50px;
+    width: 100px;
+    padding: 20px;
+    border: solid 2px black;
+}
+                </textarea>
+
+
+            <template class="html">
+                <div class="float-block">
+                    <div class="boxA">Ich bin .boxA</div>
+                    <div class="boxB">Ich bin .boxB</div>
+                    <div class="boxC">Ich bin .boxC</div>
+                </div>
+            </template>
+
+
+            <template class="task">
+                <h3>Aufgabe</h3>
+                <p>Aktuell sind alle Elements mit <code>float:left</code> nebeneinander. Ohne float wären sie
+                    untereinander (da Block-Elemente)</p>
+                <ul>
+                    <li><code>.boxA</code> kann so bleiben</li>
+                    <li><code>.boxB</code> soll rechts angeordnet werden</li>
+                    <li><code>.boxC</code> soll links angeordnet werden, aber unter .boxA angezeigt werden</li>
+                </ul>
+            </template>
+
+
+            <script>
+                function validate_task7() {
+                    const boxA = window.getComputedStyle(document.querySelector('.boxA'));
+                    const boxB = window.getComputedStyle(document.querySelector('.boxB'));
+                    const boxC = window.getComputedStyle(document.querySelector('.boxC'));
+
+                    return (
+                        boxA.float === 'left' &&
+                        boxB.float === 'right' &&
+                        boxC.float === 'left' && boxC.clear === 'left'
+                    );
+                }
+            </script>
+        </div>
+        <!-- ===================================================================================================== -->
+
+
+        <!-- ===================================================================================================== -->
+        <!-- Task 8-->
+        <div id="task8" data-title="position" data-smile="exploding_head.png">
+            <template class="info">
+                <h2>position</h2>
+                <p>Mit <code>position</code> kannst du pixel-genau entscheiden wo ein Element angezeigt werden soll
+                    (siehe
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">MDN position</a>)
+                </p>
+                <p>Die Position wird mit den Wert <code>top</code>, <code>right</code>, <code>bottom</code>,
+                    <code>left</code> gesetzt.
+                </p>
+                <ul>
+                    <li><code>position:static</code> ist der Standard. top, etc. bewirken nichts</li>
+                    <li><code>position:relative</code> Element wird Relative zur ursprünglichen Position angezeigt, d.h.
+                        <code>top: 10px</code> würde es 10px nach unten schieben
+                    </li>
+                    <li><code>position:absolute</code> Element wird aus dem Dokument genommen und kann beliebig auf dem
+                        Bildschirm positioniert werden, d.h. <code>top: 10px</code> würde es oben am Bildschirm anzeigen
+                        mit
+                        10px Abstand. <br />Wenn es in einem Element mit position:relative liegt wird dieses Element als
+                        Rahmen verwendet.</li>
+                    <li><code>position:sticky</code> Element bleibt an seine Position auch beim scrollen</li>
+                    <li><code>position:fixed</code> Element bleibt an seine Position auch beim scrollen, wird aber aus
+                        dem
+                        Dokument genommen </li>
+                </ul>
+
+            </template>
+
+            <textarea class="default">
+.boxStatic{
+    background-color: #9B5DE5;
+    position: static;
+}
+
+.boxRelative{
+    background-color: #F15BB5;
+    /*position: relative;
+    top: 10px;
+    left: 10px;*/
+}
+
+.boxAbsolute{
+    background-color: #FEE440;
+    /*position: absolute;
+    top: 10px;
+    right: 10px;*/
+}
+
+.boxSticky{
+    background-color: #00BBF9;
+    /*position: sticky;
+    top: 10px;*/
+}
+
+.boxFixed{
+    background-color: #00F5D4;
+    /*position: fixed;    
+    right: 30px;*/
+}
+
+.position-block{
+    height: 100%;
+    overflow: scroll;    
+    position: relative;
+}
+
+.position-block div{
+    margin: 10px;        
+    height: 50px;
+    width: 100px;
+    padding: 20px;
+    border: solid 2px black;    
+} 
+            </textarea>
+
+
+            <textarea class="solution">
+.boxStatic{
+    background-color: #9B5DE5;
+    position: static;
+}
+
+.boxRelative{
+    background-color: #F15BB5;
+    position: relative;
+    right: 20px;
+    bottom: 30px;
+}
+
+.boxAbsolute{
+    background-color: #FEE440;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.boxSticky{
+    background-color: #00BBF9;
+    position: sticky;
+    top: 10px;
+}
+
+.boxFixed{
+    background-color: #00F5D4;
+    position: fixed;    
+    right: 30px;
+}
+
+.position-block{
+    height: 100%;
+    overflow: scroll;    
+    position: relative;
+}
+
+.position-block div{
+    margin: 10px;        
+    height: 50px;
+    width: 100px;
+    padding: 20px;
+    border: solid 2px black;    
+} 
+                </textarea>
+
+
+            <template class="html">
+                <div class="position-block">
+                    <div class="boxFixed">Ich bin .boxFixed</div>
+                    <div class="boxStatic">Ich bin .boxStatic</div>
+                    <div class="boxRelative">Ich bin .boxRelative</div>
+                    <div class="boxAbsolute">Ich bin .boxAbsolute</div>
+                    <div class="boxSticky">Ich bin .boxSticky</div>
+
+                    <p>Weiterer Text um diese Box etwas zu erweitern und ein Scrollen zu erlauben</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                    <p>...</p>
+                </div>
+            </template>
+
+
+
+
+            <template class="task">
+                <h3>Aufgabe</h3>
+                <ol>
+                    <li>Entferne die Kommentare um die position Regeln zu aktivieren und betrachte wie die Elemente
+                        beim
+                        Scrollen reagieren</li>
+                    <li>Verschiebe .boxRelative 20px nach links und 30px nach oben (denk dran Wert muss "von der
+                        anderen
+                        Richtung kommen" - left: 10px schiebt es nach Rechts)</li>
+                    <li>Verschiebe .boxAbsolute nach ganz unten links</li>
+                </ol>
+            </template>
+
+
+
+            <script>
+                function validate_task8() {
+                    const posR = window.getComputedStyle(document.querySelector('.boxRelative'));
+                    const posA = window.getComputedStyle(document.querySelector('.boxAbsolute'));
+                    return (
+                        posR.right === '20px' && posR.bottom === '30px' &&
+                        posA.left === '0px' && posA.bottom === '0px'
+                    );
+                }
+            </script>
+        </div>
+        <!-- ===================================================================================================== -->
+
+
+
+    </div>
+	<footer><a href="https://animated-fluent-emoji.vercel.app/" target="_blank">emojis</a></footer>
+
 </body>
+
 </html>
