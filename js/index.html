@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tutorial with CodeMirror</title>
+    <link rel="stylesheet" href="codemirror/codemirror.min.css">
+    <link rel="stylesheet" href="codemirror/monokai.min.css">
+    <script src="codemirror/codemirror.min.js"></script>
+    <script src="codemirror/javascript.min.js"></script>
+    <link rel="stylesheet" href="custom.css">
+    <script src="custom.js" defer></script>
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            <h1>JavaScript Tutorial</h1>
+        </header>
+
+
+
+        <!-- <div id="reaction">
+            <img id="smile" src="reaction/slightly_smiling_face.png" alt="rating" />
+            <div id="task">
+                <div id="task_text">
+                    
+
+                </div>                
+            </div>
+        </div> -->
+
+        <div id="info">
+            <div id="text">
+
+                <article>
+                    <h2>Console</h2>
+
+                    <p>Die <em>Console</em> ist im Browser eingebaut. Logging Informationen können hier ausgegeben
+                        werden, z.B. zum debuggen.</p>
+                    <p class="important">Wichtig: In diesen Tutorial nutzen wir statt <code>console.log</code> die
+                        selbstdefinierte Funktion <code>output</code>, damit die Ausgabe im Feld unterhalb angezeigt und
+                        nicht in der Browser Console. <br />Die Browser Console siehst du in den Dev Tools (F12).</p>
+                    <p><code>//</code> und <code>/* */</code> sind Kommentare</p>
+                    <p>Beende immer ein Befehl mit einem Semikolon <code>;</code></p>
+
+                    <section>
+                        <textarea>
+/*
+    Console Demo
+*/
+// Ausgabe in der Browser Console
+console.log("Hallo Console");
+
+// Ausgabe von Text
+output("Hallo Output");
+
+// Ausgabe von Zahlen
+output(12345);
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+
+                    <p>In den nächsten Abschnitten nutze <code>output</code> um Werte anzeigen zu lassen.</p>
+
+                    <p class="exercise"><b>Aufgabe:</b> Gebe deinen Namen aus</p>
+                </article>
+
+                <article>
+                    <h2>Variablen</h2>
+
+                    <p>Variablen sind Zwischenspeicher für Werte. In JavaScript gibt es die Schlüsselwörter
+                        <code>let</code> und <code>const</code>. Konstanten (<code>const</code>) können nicht nach dem
+                        setzen eines Wertes überschrieben werden.</p>
+                    <p>Variablen können beliebig benannt werden, dürfen nur nicht mit einer Zahl beginnen oder wie ein
+                        Schlüsselwort lauten.</p>
+                    <p>Achte auch immer auf Groß-/Kleinschreibung, diese werden unterschieden.</p>
+                    <p><code>=</code> ist die Zuweisung von einem Wert und <b>nicht</b> das Gleichheitszeichen aus der
+                        Mathematik!</p>
+
+                    <section>
+                        <textarea>
+let x = 1;
+const z = 2;
+
+x = 3;
+// z = 4;  // nicht erlaubt da z eine Konstante ist
+
+output("x ist " + x);
+output("z ist " + z);
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+
+                    <p class="important">Nur zur Info, <b>nicht benutzen!</b> Es gibt noch das Schlüsselwort
+                        <code>var</code> oder man definiert eine Variable ohne Schlüsselwort. Dies kann zu Fehlern in
+                        der Anwendung führen!</p>
+
+                    <p class="exercise"><b>Aufgabe:</b> Definiere eine Variable 'meineVariable' und setze den Werte auf
+                        eine beliebige Zahl. Gebe diesen Wert aus. </p>
+                </article>
+
+
+                <article>
+                    <h2>Typen</h2>
+
+                    <p>Typen sind die Art von Daten die Gespeichert werden können. </p>
+                    <table>
+                        <tr>
+                            <th>Typ</th>
+                            <th>Verwendung</th>
+                            <th>Beispiel</th>
+                            <th>Werte</th>
+                        </tr>
+                        <tr>
+                            <td><code>string</code></td>
+                            <td>Text</td>
+                            <td>"Hallo" </td>
+                            <td>Satzzeichen beliebiger Länge umschlossen mit ' ' oder " "</td>
+                        </tr>
+                        <tr>
+                            <td><code>number</code></td>
+                            <td>Zahlen</td>
+                            <td>42</td>
+                            <td>z.B. 13 oder 8.15</td>
+                        </tr>
+                        <tr>
+                            <td><code>boolean</code></td>
+                            <td>logische Wahrheitswerte</td>
+                            <td>true</td>
+                            <td>true/ false (wahr/falsch)</td>
+                        </tr>
+                        <tr>
+                            <td><code>undefined</code></td>
+                            <td>noch kein Wert zugewiesen</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><code>null</code></td>
+                            <td>nichts zugewiesen</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+
+                    <section>
+                        <textarea>
+let exampleString = "Hallo";
+let exampleString2 = 'Welt';
+let exampleNumber = 42;
+let exampleBoolean = true;
+let exampleNull = null;
+let exampleUndefined;
+output(exampleUndefined);
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+                </article>
+
+                <article>
+                    <h2>Rechenoperationen</h2>
+
+                    <p>Zum rechnen gibt es die Operatoren <code>+</code> (addition), <code>-</code> (subtraktion),
+                        <code>*</code> (multiplikation), <code>/</code> (division)</p>
+
+                    <section>
+                        <textarea>
+const addExample = 103 + 45;
+const subExample = 20 - 14;
+const multiExample = (2 + 2) * 5;
+const divExample = 4 / 2;
+output("add:" + addExample + " sub:" + subExample 
+    + " multi:" + multiExample + " div:" + divExample);
+
+/* Diese lassen auch auf Variablen anwenden */
+const a = 5;
+const b = 1.2;
+const c = a * b;
+output(c);
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+
+                    <p class="exercise"><b>Aufgabe:</b> Du hast 6.5 Liter Cola, 5 Liter Orangensaft, 8.5 Liter Apfelsaft
+                        und 11.25 Liter Wasser gekauft.
+                        Es kommen 25 Gäste zu Besuch. Wieviel kann jeder Gast in Liter trinken, wenn es gerecht verteilt wird?
+                        Lass das Skript es ausrechnen und zeige das Ergebnis in der Konsole.</p>
+                </article>
+
+
+                <article>
+                    <h2>Texte verbinden</h2>
+
+                    <p>Mit dem <code>+</code> Zeichen kann auch Text verknüpft werden</p>
+                    <p>Es können auch Texte mit Platzhalter definiert werden mit <code>`</code> (Apostrophe zwischen den
+                        Tasten ß und Backspace) und <code>${x}</code> </p>
+
+                    <section>
+                        <textarea>
+const firstName = "Bob";
+const lastName = "Sideshow";
+const name = firstName + " " + lastName;
+output(name);
+
+const temperatur = 25;
+output("Es sind " + temperatur + " Grad");
+// oder
+output(`Es sind ${temperatur} Grad`);
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+
+                    <p class="exercise"><b>Aufgabe:</b> Erstelle Variablen für folgenden Werte: Vorname, Nachname,
+                        Klasse, Lieblingsfach. Gebe sie aus im Format <em>"Vorname Nachname (Klasse) -
+                            Lieblingsfach"</em></p>
+                </article>
+
+
+                <article>
+                    <h2>Arrays</h2>
+
+                    <p>Arrays erlauben die Erstellung von Listen. Jeder Eintrag erhält ein Index, um auf das Element
+                        zuzugreifen. Arrays werden mit <code>[]</code> erzeugt. <code>length</code> gibt die Anzahl der
+                        Einträge zurück.</p>
+                    <p class="important">Wie fast überall in der Informatik fängt man bei 0 an zu zählen!</p>
+                    <p>Mit der Funktion <code>push(x)</code> kann ein Wert hinzugefügt werden.</p>
+                    <p><code>pop()</code> gibt den letzten Eintrag zurück und entfernt diesen.</p>
+                    <section>
+                        <textarea>
+let animals=["Lion", "Red Panda", "Frog"];
+output(animals);
+output(animals[0]); // Lion hat Index 0 (erster Eintrag)
+output(animals.length);
+
+animals.push('Snake');
+animals.push('Elephant');
+output(animals);
+
+const lastEntry = animals.pop();
+output(lastEntry);
+output(animals);
+
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+
+                    <p class="exercise"><b>Aufgabe:</b> Erstelle ein Array mit drei beliebigen Werten (z.B. car mit
+                        Automarken). Benutze push, um ein viertes Element hinzuzufügen. Gebe den zweiten und letzen
+                        Eintrag aus.</p>
+                </article>
+
+                <article>
+                    <h2>Schleifen</h2>
+
+                    <p>Mit Schleifen kannst du über die Einträge in einem Array iterieren.</p>
+                    <p>Die <code>for</code> Schleife besteht aus drei Abschnitten:
+                    <ul>
+                        <li><b>Laufvariable: </b><code>let i = 0;</code> damit greifen wir auf das Index vom Array</li>
+                        <li><b>Abbruchkriterium:</b> <code>i &lt;= animals.length;</code> wir gehen so lange i kleiner
+                            Array-Länge durch die Schleife</li>
+                        <li><b>Aufzählung: </b> <code>i++</code> is eine Kurzschreibweise von <code>i = i + 1</code>,
+                            d.h. wir erhöhen den Wert um 1 bei jeden durchlauf </li>
+                    </ul>
+                    </p>
+
+                    <p>Alternativ können wir mit <code>for ... of</code> auf die Elemente zugreifen, wenn wir den Index
+                        nicht benötigen.</p>
+
+                    <section>
+                        <textarea>
+let animals=["Lion", "Red Panda", "Frog"];
+for(let i = 0; i &lt; animals.length; i++){
+    output(i +". " + animals[i]);
+}
+
+output("--------");
+for(let animal of animals){
+    output(animal);
+}
+
+output("--------");
+// Diese Schleife gibt die Zahlen 0 bis 9 aus
+for(let j = 0; j &lt; 10; j++){
+    output(j);
+} 
+
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+
+                    <p class="exercise">
+                        <b>Aufgabe 1:</b> Kopiere dein Array von vorhin und gebe die Elemente nummeriert untereinander
+                        aus. Zeige den ersten Eintrag aber als 1. an, nicht 0.
+                    </p>
+                    <p class="exercise">
+                        <b>Aufgabe 2 (Schwierig):</b> Erstelle ein zweites Array gleicher Länge (z.B. Autolackfarbe) und
+                        gebe die Werte zusammen mit den Werten vom ersten Array aus (z.B. <em>2. Ferrari - rot</em>)
+                    </p>
+                </article>
+
+                <article>
+                    <h2>Objekte</h2>
+
+                    <p>Wir können Variablen auch in sogenannte Objekte gruppieren. Objekte werden mit <code>{}</code>
+                        Klammern erzeugt. Objekte haben sogenannte <em>Properties</em>, Feldname für die Einträge. </p>
+                    <p><code><pre>
+let example = {
+    prop1: 42,
+    prop2: "Beispiel"
+};
+                </pre></code></p>
+                    <p>Um auf die Werte im Objekt zuzugreifen nutzt man die Punkt-Operator <code>.</code></p>
+
+                    <section>
+                        <textarea>
+// Objekt erstellung
+let lion = {
+    name: "Leo",
+    fur: "Yellow/Grey",
+    animal: "Lion",
+    age: 10,
+    hungry: true
+    };
+
+output(lion.name); // Punkt-Operator
+
+// Array aus Objekten (hier 'lion' und ein weiteres Objekt)    
+let cage = [lion, {
+    name: "Tony",
+    fur: "Orange/Black Stripes",
+    animal: "Tiger",
+    age: 12,
+    hungry: true,
+}];
+
+/* Ausgabe [object Object], 
+   da Skript nicht weiß wie Objekt hier ausgegeben werden soll*/
+output(cage); 
+
+console.log(cage); // In der Console (F12) wird das Objekt ausgegeben
+
+output(cage[1].name);  // Array Index und Punkt-Operator
+
+// Schleifen gehen auch
+for(let c of cage){
+    output(`${c.name} is a ${c.animal} and is ${c.age} years old`);
+}
+
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+
+                    <p class="exercise"><b>Aufgabe 1:</b> Definiere ein Objekt für ein Ding deiner Wahl mit mindestens
+                        drei Werten <br /><em>(z.B. Auto: Marke, Lackfarbe, kW)</em></p>
+                    <p class="exercise"><b>Aufgabe 2:</b> Erstelle ein Array mit drei Einträgen von dem Ding.</p>
+                    <p class="exercise"><b>Aufgabe 3:</b> Benutze eine Schleife um die Einträge auszugeben. Es sollen
+                        alle Werte ausgegeben werden</p>
+                </article>
+
+                <article>
+                    <h2>Bedingungen</h2>
+
+                    <p>Mit Bedingungen kann der Programmfluß gesteuert werden. Bedingungen verwenden immer Boolesche
+                        Logik.</p>
+                    <p>Ein <code>if</code>-Block wird nur ausgeführt wenn die Bedingung wahr is (<code>true</code>).
+                        <br />Ein <code>else</code>-Block wird ausgeführt wenn die Bedingung nicht erfüllt ist</p>
+                    <p class="important">Gleicheitsvergleich wird hier mit <code>===</code> vorgenommen.</p>
+
+                    <section>
+                        <textarea>
+let example = null;
+if(example === null){
+    output("is null");
+}
+
+output("-----------------");
+
+let temperatur = 25;
+if(temperatur &gt; 24){
+    output("Ist wohl wieder Sommer");
+} else{
+    output("Brr...");
+}
+
+output("-----------------");
+
+let number = 42;
+if(number &gt; 0){
+    output("number " + number + " is positive");
+}else if (number &lt; 0){
+    output("number " + number + " is negative");
+}else {
+    output("number is zero");
+}
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+
+                    <p class="exercise"><b>Aufgabe:</b> Ändere die Werte von den Variablen, um andere Ausgaben zu
+                        bekommen.</p>
+                </article>
+
+                <article>
+                    <h2>Switch</h2>
+
+                    <p><code>switch</code> bietet eine Alternative zur <code>if</code> Bedingung. Die Bedinung wir beim
+                        <code>case</code> definiert. <code>default</code> wird ausgeführt wenn keine Bedingung erfüllt
+                        ist.</p>
+
+                    <section>
+                        <textarea>
+let fruit = "Mango";
+let price;
+switch(fruit) {
+    case "Orange":
+        price = "1 Euro";
+        break;
+    case "Mango":
+        price = "2,50 Euro";
+        break;
+    default:
+        price = "unbekannt";
+}
+
+output(`${fruit} kostet ${price}`);
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+
+                    <p class="exercise"><b>Aufgabe:</b> Setzte <em>fruit</em> auf "Apple". Ein Apfel kostet 0,79 Euro.
+                    </p>
+                </article>
+
+                <article>
+                    <h2>Booleasche Logik</h2>
+
+                    <p class="important">Nur zur Info. Werdet ihr später in Mathe mal behandeln.</p>
+
+                    <p>Booleasche Logik erlaubt den Vergleich von Aussagen. Sie kann auch als Schalter oder binäre Logik
+                        angesehen werde, d.h. true = an = 1, false = aus = 0. </p>
+                    <p>Das Ausrufezeichen <code>!</code> steht für nicht, negiert den Wert. <code>!==</code> bedeutet
+                        nicht gleich.</p>
+                    <p>Mit <code>&amp;&amp;</code> (AND) lassen sich Bedinungen verknüpfen. Beide müssen 'true' ergeben.
+                        Mit <code>||</code> (OR) muss nur eine Bedingung erfüllt sein.</p>
+
+                    <section>
+                        <textarea>
+const n = 1;
+const m = 1;
+const k = 2;                        
+output("n = m? " + (n === m)); // true 
+output("n != k? " + (n !== k)); // true
+output("n = k? " + (n === k)); // false
+
+output("-----------------");
+output(true && true);
+output(false && true);
+output(true && false);
+output(false && false);
+                           
+output("-----------------");
+output(true || true);
+output(false || true);
+output(true || false);
+output(false || false);                      
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+                </article>
+
+                <article>
+                    <h2>Funktionen</h2>
+
+                    <p>Funktionen (<code>function</code>) erlauben dir Logik leichter wieder zu verwenden. Eine Funktion
+                        hat einen Namen, kann Parameter haben und kann Werte zurückgeben (mit <code>return</code>).</p>
+                    <p>Funktionen müssen vor dem Aufruf definiert werden.</p>
+
+                    <section>
+                        <textarea>
+// ohne Parameter, ohne Rückgabewert
+function sayHello(){
+    output("Hi");
+}
+
+// mit Parameter (hier a), ohne Rückgabewert
+function scream(a){
+    output(a + "!!!!");
+}
+
+// mit Parameter (hier a und b), mit Rückgabewert
+function mult(a, b){
+    return a * b;
+}
+
+// ohne Parameter, mit Rückgabewert
+function getDate(){
+    const date = new Date();
+    return "Das aktuelle Datum ist der: " 
+        + date.getDate() + "." 
+        /* Date in JavaScript ist etwas seltsam. Januar = 0, 
+           daher müssen wir hier + 1 rechnen. */
+        + (date.getMonth() + 1);
+}
+
+sayHello();
+scream("Banzai");
+output(mult(2, 5));
+output(getDate());
+scream("The End");
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+
+                    <p class="exercise"><b>Aufgabe 1:</b> Schreibe eine Funktion das drei Parameter erhält: Name (name),
+                        Lieblingsfarbe (color), Alter (age). <br />
+                        Die Funktion soll die Parameter zu einenm Text zusammenfügen (z.b: 'Julia Blau 15') und
+                        zurückgeben.<br />
+                        Rufe die Funktion mehrmals auf und gebe den Rückgabewert in der Konsole aus. <br />
+                        Die Funktion <b>soll nicht selbst</b> den Text in der Konsole ausgeben!</p>
+                    <p class="exercise"><b>Aufgabe 2:</b> Erstelle eine Funktion die ein Objekt 'friend' als Parameter
+                        erhält. <br />
+                        Setzte die Werte des Objekts zusammen zu einen Text wie in der Aufgabe davor und gebe das
+                        Ergebnis zurück.<br />
+                        <code>const friend = {name: "Aiko" , color: "green", age: 16};</code>
+                    </p>
+                </article>
+
+                <article>
+                    <h2>Funktionen als Parameter</h2>
+
+                    <p class="important">Nur zur Info. Müsst ihr nicht anwenden.</p>
+
+                    <p>Funktionen können wie Werte, Arrays und Objekt als Parameter and Funktionen übergeben werden.</p>
+
+                    <section>
+                        <textarea>
+function add(a, b) {
+    return a + b;
+}
+
+function calc(n1, n2, calcFunc){ // calcFunc ist die Funktion als Parameter
+    const result = calcFunc(n1, n2);
+    return result;
+}
+
+const x = calc(1, 2, add); // add ist die Funktion
+output(x);
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+                </article>
+
+                <article>
+                    <h2>Konstruktoren</h2>
+
+                    <p class="important">Nur zur Info. Müsst ihr nicht anwenden.</p>
+                    <p>Mit Konstruktorfunktionen können Objekte erstellt werden. <br />
+                        Diese können auch selbst Funktionen besitzen. <br />
+                        Neue Objekte werden mit <code>new</code> erstellt. <br />
+                        Um auf die Werte im Objekt zuzugreifen muss der Schlüsselwort <code>this</code> genutzt werden.
+                    </p>
+
+                    <p>Im Beispiel wir ein <em>Lambda</em> verwendet. Es ist eine andere Schreibweise für eine Funktion.</p>
+                    <code><pre>
+function test()
+{
+    return "hello";
+}                
+                </pre></code>
+                    <p>kann auch geschrieben werden als</p>
+                    <code>
+const test = () =&gt; { return "hello"; }
+                </code>
+
+                <p><code>=&gt;</code> soll dabei als <em>Lambda</em>-Pfeil gelesen werden, nicht als &gt;=</p>
+
+                    <section>
+                        <textarea>
+// Konstruktorfunktion für Person
+function Person(name, age){
+    this.name = name;
+    this.age = age;
+    // das hier ist die print Funktion als Lambda 
+    this.print = () =&gt; {
+        return this.name + " " + this.age;
+    }
+}
+
+// hier wird eine sogenannte Instanz erzeugt
+var p = new Person("Bob", 24);
+
+// Das Objekt besitzt die Funktion 'print'
+output(p.print());
+                    </textarea>
+                        <button>Skript ausführen</button>
+                        <textarea></textarea>
+                    </section>
+                </article>
+
+                <!--
+
+            <article>
+                <h2>Typen</h2>
+
+                <p></p>
+
+                <section>
+                    <textarea>
+
+                    </textarea>
+                    <button>Skript ausführen</button>
+                    <textarea></textarea>
+                </section>
+            </article>
+        
+        -->
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    </div>
+
+</body>
+
+</html>
