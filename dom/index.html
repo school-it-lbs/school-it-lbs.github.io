@@ -336,6 +336,65 @@ fetch("data.json")
                     </div>
                 </article>
 
+
+                  <!-- ============================================================================================== -->
+
+
+                  <article>
+                    <h2>Formulare</h2>
+                
+                    <p>Formulare <code>&lt;form&gt;</code>werden häufig verwendet um Daten an den Server zu übertragen
+                        zum Beispiel Bestelldaten.</p>
+                    
+                    <p>Wir können Formulare jedoch auch mit JavaScript auswerten.</p>
+
+                    <p class="important">Klicke nicht auf <b>send</b> bevor das Skript ausgeführt wurde!</p>
+
+
+                    <div id="code6" class="html_example">                        
+                        <form>
+                            <input type="text" value="" placeholder="Your message" />
+                            <button>send</button>
+                            <textarea></textarea>
+                        </form>
+                    </div>
+
+                    <code><pre>                        
+&lt;form&gt;
+    &lt;input type&#x3D;&quot;text&quot; value&#x3D;&quot;&quot; placeholder&#x3D;&quot;Your message&quot; &#x2F;&gt;
+    &lt;button&gt;send&lt;&#x2F;button&gt;
+    &lt;textarea&gt;&lt;&#x2F;textarea&gt;
+&lt;&#x2F;form&gt;
+</pre></code>
+                    
+                    <section>
+                        <textarea>
+const htmlBlock = document.querySelector("#code6");
+const form = htmlBlock.querySelector("form");
+
+form.addEventListener("submit", function(e){
+    // verhindert das Formular versendet wird
+    e.preventDefault();
+    const formValue = form.querySelector("input").value;
+    form.querySelector("textarea").innerText = formValue + "!!!";
+});
+
+                    </textarea>
+                        <button>Skript ausführen</button>                        
+                    </section>
+                    
+                    <p>In diesen Beispiel wir der Text vom <code>input</code> in die <code>textarea</code> eingetragen.
+                    Wir nutzen den <code>submit</code> Event-Listener, der beim absenden von Formularen verwendet wird.
+                    Die Funktioner <code>preventDefault</code> verhindert das Standardverhalten.</p>
+                    
+
+                    <div class="exercise">
+                        <h3>Aufgabe</h3>
+                        <p>Prüfe die Eingabe und verhindere das ein leerer Text gesendet werden kann. 
+                            Bei einem leeren Text soll der Rahmen vom <code>input</code> rot umrandet werden.</p>
+                    </div>
+                </article>
+
             </div>
         </div>
     </div>

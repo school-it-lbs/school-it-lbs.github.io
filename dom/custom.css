@@ -325,3 +325,16 @@ h2:before
     padding: 2px;
     width: 50px;
 }
+
+#code6 form{
+    margin: 20px;
+    padding: 20px;
+    background-color: #4890ee;
+    border-radius: 10px;
+}
+
+#code6 form textarea
+{
+    display: block;
+    margin-top:10px;
+}
