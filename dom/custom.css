@@ -59,6 +59,10 @@ nav button.active {
     border-left-color: #264de4;
 }
 
+ol li {
+    margin-bottom: 8px;
+}
+
 div#reaction {
     grid-area: reaction;
     justify-content: center;
@@ -94,6 +98,11 @@ div#render {
 code {
     font-size: 1.3em;
     color: darkcyan;
+}
+
+dt {
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 #render {
