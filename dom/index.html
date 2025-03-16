@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tutorial with CodeMirror</title>
+    <link rel="stylesheet" href="codemirror/codemirror.min.css">
+    <link rel="stylesheet" href="codemirror/monokai.min.css">
+    <script src="codemirror/codemirror.min.js"></script>
+    <script src="codemirror/javascript.min.js"></script>
+    <link rel="stylesheet" href="custom.css">
+    <script src="custom.js" defer></script>
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            <h1>JavaScript DOM Manipulation Tutorial</h1>
+        </header>
+
+
+        <div id="info">
+            <div id="text">
+
+                <p>DOM steht für Document Object Model und erlaubt den Zugriff auf das HTML-Dokument als wäre es ein JavaScript Objekt.</p>
+
+                <p>Im JavaScript ist mit <code>document</code> das HTML-Dokument gemeint.</p>
+
+                <div class="important">Die Beispiele bestehen immer aus folgende Elementen:
+                    <ul>
+                        <li><b>Beschreibung</b></li>
+                        <li><b>HTML Block</b>: Inhalt wird durch Skript verändert</li>
+                        <li><b>HTML Code</b>: Zeigt das HTML in der HTML Ansicht. 
+                            <br>Wichtig ist dabei die ID (z.B. id="code1" / #code1)
+                            <br>Verwendet immer die ID im Skript damit der richtige HTML Block verändert wird</li>
+                        <li><b>Skript</b>: Hier müsst ihr das Skript bearbeiten. 
+                            <br>Durch den Button "Skript ausführen" wird das HTML Block aktualisiert. 
+                            <br>Achtet darauf die ID zu nutzen!</li>
+                    </ul>
+
+                </div>
+
+
+
+                <!-- ============================================================================================== -->
+                <article>
+                    <h2>Query</h2>
+
+                    <p><code>document</code> verweist auf das HTML Dokument selbst. Um Elemente zu bearbeiten müssen wir sie im selektieren.
+                        <br>Dafür gibt es die Funktion <code>querySelector</code>. Die Abfrage verwendet die gleiche Syntax wie aus CSS bekannt.</p>
+
+                    <p><code>document.querySelector("#exampleA")</code> gibt das Element mit der ID exampleA zurück.</p>
+                    <p><code>document.querySelector(".things")</code> gibt das Element mit der Class things zurück.</p>
+
+                    <p class="important"><code>querySelector</code> gibt immer den ersten Treffer zurück!</p>
+
+                    <div id="code1" class="html_example">
+                        <div class="box">
+                            .box
+                        </div>
+                    </div>
+
+                    <code><pre>
+&lt;div id&#x3D;&quot;code1&quot;&gt;
+  &lt;div class&#x3D;&quot;box&quot;&gt;
+    .box
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;
+</pre></code>
+                    
+                    <section>
+                        <textarea>
+//HTML Block für diese Aufgabe auswählen
+const htmlBlock = document.querySelector("#code1");
+
+const theBox = htmlBlock.querySelector(".box");
+theBox.style.color = "white";
+theBox.style.backgroundColor = "blue";
+                    </textarea>
+                        <button>Skript ausführen</button>                        
+                    </section>
+                    <p>Das Skript verändert dynamisch das Style vom Element.</p>
+                    <p class="exercise"><b>Aufgabe:</b> Ändere die Farbe der Box und der Schrift. 
+                        <br>Vergrößere .box auf 200px (width) x 250px (height)</p>
+                </article>
+                <!-- ============================================================================================== -->
+
+
+                <article>
+                    <h2>Elemente generieren</h2>
+
+                    <p>Wir können auch dynamisch Elemente in die DOM hinzufügen.</p>
+                    <p>Die Elemente müssen zu erst mit <code>createElement</code> an <code>document</code> erzeugt werden.</p>
+                    <p>Anschließend können sie als Kind-Elemente mit <code>appendChild</code> angehängt werden.</p>
+                    
+                    <div id="code2" class="html_example">
+                        <div class="container">
+                            <p>container</p>
+                        </div>
+                    </div>
+
+                    <code><pre>
+&lt;div id&#x3D;&quot;code2&quot; class&#x3D;&quot;html_example&quot;&gt;
+    &lt;div class&#x3D;&quot;container&quot;&gt;
+        &lt;p&gt;container&lt;&#x2F;p&gt;
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;
+</pre></code>
+                    
+                    <section>
+                        <textarea>
+const htmlBlock = document.querySelector("#code2");
+
+//container auswählen
+const container = htmlBlock.querySelector(".container");
+
+//neues element definieren
+const newItem = document.createElement("div");
+//in neue element HTML setzen
+newItem.innerHTML = "<p>test</p>";
+
+//element in container einfügen
+container.appendChild(newItem);
+                    </textarea>
+                        <button>Skript ausführen</button>                        
+                    </section>
+                    <p>Im Beispiel setzen wir im neuen Element die Werte mit <code>innerHTML</code>.</p>
+                    <p>Die Farbe und Dimensionen vom <code>div</code> sind im CSS vordefinitert.</p>
+
+                    <div class="exercise"><b>Aufgabe:</b> 
+                        <p>1. Änder das Skript das ein Element hinzugefügt mit dem Text "Hello World", 
+                        dabei soll das erste Wort fett (<code>&lt;b&gt;</code>) ausgebene weden.</p>
+                        <p>2. Das neue Element soll die ID "hi" erhalten (<code>newItem.id = "hi"</code>)</p>
+                        <p>3. Nachdem das Skript mindestens einmal ausgeführt wurde, 
+                        ändere das Skript ab und entferne aus dem DOM das Element mit der ID "hi". 
+                        <br>Nutze dazu die Funktion <code>container.removeChild</code>. Es erwartet ein Element z.B. vom <code>querySelector</code></p>
+
+                    </div>
+                </article>
+                <!-- ============================================================================================== -->
+
+
+                <article>
+                    <h2>Events</h2>
+
+                    <p>Wir können auf Interaktion auf der Seite ("Events") reagieren indem wir Elemente "Event Listener" zuweisen.</p>
+                    <p>Beim setzen vom <code>addEventListener</code> ist der erste Parameter die Art vom Event, z.B. Click, 
+                    und der zweite Parameter eine sogenannte Callback-Funktion die aufgerugen wird wenn das Event eintritt. </p>
+                    <p>Die Callback-Funktion erhält als Parameter (hier <code>e</code>) das Element das den Event ausgelöst hat (<code>e.target</code>).</p>
+                    <p>Es gibt sehr viele verschiedene Event-typen, aber für uns reicht "click"</p>
+
+                    <div id="code3" class="html_example">
+                        <button>Click me!</button>
+                    </div>
+
+                    <code><pre>
+&lt;div id&#x3D;&quot;code3&quot; class&#x3D;&quot;html_example&quot;&gt;
+    &lt;button&gt;Click me!&lt;&#x2F;button&gt;
+&lt;&#x2F;div&gt;
+</pre></code>
+                    
+                    <section>
+                        <textarea>
+const htmlBlock = document.querySelector("#code3");
+const button = htmlBlock.querySelector("button");
+
+button.addEventListener("click", function(e){
+    const sender = e.target;
+    sender.innerText = "😁";
+});
+
+
+
+                    </textarea>
+                        <button>Skript ausführen</button>                        
+                    </section>
+                    <p><br>Die Callback-Funktion kennt nicht automatisch das Element das es aufgerufen hat.
+                        <br>Im Beispiel ist <code>e.target</code> bzw.  <code>sender</code> das Button. </p>
+                    
+                    <div class="exercise"><b>Aufgabe:</b>
+                        <ol>
+                            <li>Setze die Hintergrundfarbe vom Button nach dem Click.</li>
+                            <li>Merke die den Status vom Knopf (boolean <code>let</code> variable außerhalb vom event listener) und ändere die Farbe nach jeden Click.</li>
+                            <li>Gehe zurück zu Aufgabe 1 und setze einen Click Event Listener an das <code>div</code> das die Hintergrundfarbe ändert</li>
+                        </ol>                        
+                    </div>
+                </article>
+
+
+                <!-- ============================================================================================== -->
+
+
+                <article>
+                    <h2>Inhalte dynamisch anzeigen</h2>
+
+                    <p>Mit Styles können wir dynamisch Elemente anzeigen und ausblenden.<br>
+                    In CSS versteckt die Regel <code>display: none;</code> ein Element.<br>
+                    Die Regel <code>display: block;</code> zeigt es wieder an, als Block-Element.</p>
+                    <p>Im Skript nutzen wir <code>querySelectorAll</code> um alle Element vom Typ auszuwählen. <br>
+                    Wir können über die Element mit <code>forEach</code> iterieren.</p>
+                    <p>Im Skript müssen wir die Event-Listener erst registieren. Beim Click-Event verstecken wir erst alle Tabs und zeigen dann den aktiven Tab an.</p>
+                    <p>Um die Tabs (button) mit dem Inhalt (div) zu verknüpfen nutzen wir ein <code>data-*</code> Attribut. 
+                        Solche Attribute sind frei definierbar, müssen aber mit data- beginnen. 
+                        Im Skript sind sie über <code>dataset</code> aufrufbar (hier <code>data-tab</code> &rarr; <code>dataset.tab</code>).</p>
+
+
+                    <div id="code4" class="html_example">                        
+                        <button data-tab="tabA">Tab A</button>
+                        <button data-tab="tabB">Tab B</button>
+                        <div id="tabA">Hello, I'm #tabA</div>
+                        <div id="tabB">Me, I am #tabB</div>                        
+                    </div>
+
+                    <code><pre>
+&lt;div id&#x3D;&quot;code4&quot; class&#x3D;&quot;html_example&quot;&gt;                        
+    &lt;button data-tab&#x3D;&quot;tabA&quot;&gt;Tab A&lt;&#x2F;button&gt;
+    &lt;button data-tab&#x3D;&quot;tabB&quot;&gt;Tab B&lt;&#x2F;button&gt;
+    &lt;div id&#x3D;&quot;tabA&quot;&gt;Hello, I&#39;m #tabA&lt;&#x2F;div&gt;
+    &lt;div id&#x3D;&quot;tabB&quot;&gt;Me, I am #tabB&lt;&#x2F;div&gt;                        
+&lt;&#x2F;div&gt;
+</pre></code>
+                    
+                    <section>
+                        <textarea>
+const htmlBlock = document.querySelector("#code4");
+const buttons = htmlBlock.querySelectorAll("button");
+const tabs = htmlBlock.querySelectorAll("div");
+
+//event listener für jeden button setzen
+buttons.forEach(function(button){
+    button.addEventListener("click", function(e){
+        //alle Tabs verstecken
+        tabs.forEach(function(tab){
+            tab.style.display = "none";
+        });
+    
+        //aktiven Tab ermitteln und anzeigen
+        const activeTab = e.target.dataset.tab;
+        htmlBlock.querySelector("#" + activeTab).style.display = "block";
+    });
+});
+                    </textarea>
+                        <button>Skript ausführen</button>                        
+                    </section>
+                                       
+                    <div class="exercise"><b>Aufgabe:</b>
+                   <br>Erweitere das Skript das nach der Initialierung der zweite Tab automatisch ausgeblendet wird.
+                   <br>Zum testen Seite neu laden! (Denk daran Skript zu kopieren)
+                   <br>Tipp: Du kann das verstecken der Tabs in eine Funktion z.B. <code>hideTabs</code> auslagern.
+                    </div>
+                </article>
+
+                <!-- ============================================================================================== -->
+
+
+                <article>
+                    <h2>Dynamisch Daten laden und anzeigen</h2>
+
+                    <p class="important">Diese Beispiel funktioniert nur auf einem Server! 
+                        Die Funktion <code>fetch</code> wird lokal blockiert.</p>
+
+                    <p>Im Projekt haben wir eine JSON Datei mit Preisdaten. Mit <code>fetch</code> können wir Daten asynchron nachladen, 
+                        das bedeutet wir müssen auf das Ergebnis warten. Das können wir mit der Funktion <code>then</code>.                        
+                    </p>
+                    <p>Im Skript laden wir die Daten, greifen auf die JSON Werte zu und iterieren 
+                        dann durch die einzelnen Elemente und rufen <code>render</code> auf.</p>
+
+
+                    <div id="code5" class="html_example">                        
+                        <div class="container"></div>
+                    </div>
+
+                    <code><pre>                        
+&lt;div id&#x3D;&quot;code5&quot; class&#x3D;&quot;html_example&quot;&gt;                        
+    &lt;div class&#x3D;&quot;container&quot;&gt;&lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;
+</pre></code>
+                    
+                    <section>
+                        <textarea>
+const htmlBlock = document.querySelector("#code5");
+const container = htmlBlock.querySelector(".container");
+
+//leere den Container
+container.innerHTML = "";
+
+//Funktion wird nach laden der Daten aufgerufen
+function render(el){
+    //in der Console siehst du die Datenstruktur
+    console.log(el);
+    const paragraph = document.createElement("p");
+    paragraph.innerText = el.name;    
+    container.appendChild(paragraph);
+}
+
+// lade data.json
+fetch("data.json")
+    // extrahiere Inhalt als JSON
+    .then(function(data){ return data.json(); })
+    // iteriere durch jeden Eintrag
+    // (Hinweis: Klappt hier nur weil Daten im JSON ein Array sind)
+    .then(function(json){ 
+        json.forEach(function(j){ render(j); }) 
+    });
+                    </textarea>
+                        <button>Skript ausführen</button>                        
+                    </section>
+
+                    <p>In der console wird die Datenstrukur ausgegeben <code>{ name: "", price: 0 }</code></p>
+                                       
+                    <div class="exercise"><b>Aufgabe:</b>
+                   <br>Erstelle in <code>render</code> statt einem <code>p</code> ein <code>div</code>. 
+                   Im <code>div</code> gebe neben <code>name</code> auch <code>price</code> aus, umschlossen von 
+                   einem <code>span</code> Element. Das passende style ist bereits definiert.
+                    </div>
+                </article>
+
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

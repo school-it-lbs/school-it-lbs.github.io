@@ -1,0 +1,318 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: content-box;
+    height: 100vh;
+    line-height: 1.5rem;
+    counter-reset: my-counter;
+}
+
+#container {
+
+
+    display: grid;
+    grid-template-columns: 120px 600px 600px 400px;
+    gap: 40px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "head head head head"
+        "nav info coding reaction"
+        "nav info render reaction"
+        "nav info . .";
+}
+
+
+header {
+    grid-area: head;
+    background-image: url('Unofficial_JavaScript_logo_2.svg');
+    background-repeat: no-repeat;
+    background-size: 70px;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    padding-left: 80px;
+    padding-top: 20px;
+}
+
+h2 {
+    margin-top: 0;
+    counter-increment: my-counter;
+}
+
+nav {
+    grid-area: nav;
+}
+
+nav button {
+    border: none;
+    background-color: transparent;
+    text-transform: uppercase;
+    font-size: 18px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    display: block;
+    border-left: solid 6px transparent;
+}
+
+nav button:hover,
+nav button.active {
+    border-left-color: #264de4;
+}
+
+div#reaction {
+    grid-area: reaction;
+    justify-content: center;
+}
+
+#smile {
+    margin-left: 60px;
+}
+
+div#info {
+    grid-area: info;
+}
+
+div#code {
+    grid-area: coding;
+}
+
+div#render {
+    grid-area: render;
+}
+
+#editor {
+    height: 500px;
+    width: 600px;
+    border: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+#render {
+    height: 500px;
+}
+
+code {
+    font-size: 1.3em;
+    color: darkcyan;
+}
+
+#render {
+    border: dashed grey 2px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: rgb(186, 235, 235);
+}
+
+#render::before {
+    content: 'HTML Ausgabe';
+    display: block;
+    position: absolute;
+    margin-top: -24px;
+    color: grey;
+}
+
+#code::before {
+    content: 'CSS';
+    display: block;
+    position: absolute;
+    margin-top: -24px;
+    color: grey;
+}
+
+#solution {
+    display: none;
+}
+
+#solve {
+    color: grey;
+    border: grey 1px dashed;
+    padding: 10px;
+    margin: 10px;
+}
+
+#steps {
+    display: none;
+}
+
+#render.correct {
+    background-image: url(reaction/check_mark.png);
+    background-color: rgb(235, 163, 235);
+
+}
+
+details {
+    margin-bottom: 20px;
+}
+
+summary {
+    font-size: 18px;
+    font-weight: 700;
+
+}
+
+summary:hover {
+    cursor: pointer;
+}
+
+
+
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 4px;
+    border: solid 1px #e9e9ed;
+    overflow: hidden;    
+}
+
+article{
+    margin-bottom: 80px;
+}
+
+section textarea:nth-of-type(2){
+    width: calc(100%, -10px);
+    height: 100px;
+    display: block;
+    resize: none;
+}
+
+section button{
+    padding: 4px;
+}
+
+.important{
+    background-color: #f4bd59;
+    color: #910e00;
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.exercise{
+    background-color: #6cc3f5;
+    color: #064cb4;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+table, tr, td, th{
+    border: solid 1px grey;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    padding: 10px;
+    text-align: left;
+}
+
+th{
+    background-color: #6cc3f5;
+}
+
+h2:before
+{    
+    content:counter(my-counter) ". ";
+}
+
+
+/* code blocks */
+.html_example{
+    width: 100%;
+    height: 300px;
+    border: solid 1px darkgrey;
+    margin-bottom: 20px;    
+    position: relative;
+    overflow: scroll;
+}
+
+    .html_example::after{
+        content: "html";
+        display: inline-block;
+        position: absolute;
+        top: 2px;
+        right: 6px;
+        color: lightgray;
+    }
+
+#code1 .box{
+    display: block;
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+}
+
+#code2 .container{
+    display: block;
+    border: dashed 1px blue;
+    width: 300px;
+    height: 200px;
+    margin: 20px;
+    padding: 10px;
+}
+
+#code2 .container div{
+    background-color: yellowgreen;
+    padding: 2px 10px;
+    margin: 2px;
+}
+
+#code3 button{
+    margin: 20px;
+    padding: 40px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+#code4 button{
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 0;
+    border: 0;
+    border-bottom: solid 2px rgb(55, 100, 223);
+    margin: 10px;
+}
+
+#code4 button:hover{
+    border-bottom-color: rgb(137, 25, 160);
+    cursor: pointer;
+}
+
+#code4 div{
+    width: 500px;
+    height: 100px;
+    padding: 20px;
+    margin: 10px;    
+    border-radius: 10px;
+}
+
+#code4 div:nth-of-type(1){
+    background-color: rgb(102, 209, 150);
+}
+
+#code4 div:nth-of-type(2){
+    background-color: rgb(90, 90, 204);
+}
+
+#code5 div.container{
+    border: solid 1px grey;
+    width: 400px;
+    height: 200px;
+    margin: 10px;
+    padding: 10px;
+}
+
+#code5 div.container p,
+#code5 div.container div{
+    color: white;
+    background-color: #001f4e;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 10px;
+}
+
+#code5 div.container span{
+    background-color: #ff7800;
+    color: #5e3500;
+    float: right;
+    padding: 2px;
+    width: 50px;
+}
