@@ -1,0 +1,38 @@
+body{
+    background-color: darkgrey;
+    display: flex;
+    justify-content: center;        
+}
+
+canvas{
+    border: solid 1px rgb(22, 56, 95);
+    background-color: white;
+    margin-top: 100px;
+}
+
+img{
+    display: none;
+}
+
+
+
+body.editor img{
+    display: block;
+    margin-right: 50px;
+}
+
+body.editor{
+    flex-direction: column;
+}
+
+body.editor textarea{
+    height: 50px;
+}
+
+body.editor div{
+    padding-top: 20px;
+}
+
+body.editor canvas{
+    margin-top: 0;
+}
